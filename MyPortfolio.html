@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Anubhav Purohit — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f5f3ef;
+      --surface: #ffffff;
+      --ink: #1a1a1a;
+      --ink-light: #6b6b6b;
+      --accent: #2e6b5e;
+      --accent-light: #e8f0ee;
+      --border: #e0ddd8;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 4rem;
+      background: rgba(245,243,239,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      text-decoration: none;
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 80px;
+    }
+    .hero-left {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 6rem 4rem 6rem 5rem;
+    }
+    .hero-tag {
+      font-size: 0.72rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 1.4rem;
+      display: flex; align-items: center; gap: 0.7rem;
+    }
+    .hero-tag::before {
+      content: ''; display: block;
+      width: 28px; height: 1px; background: var(--accent);
+    }
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(3.2rem, 5.5vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.8rem;
+    }
+    h1 span { font-weight: 700; color: var(--accent); }
+    .hero-desc {
+      font-size: 1rem; line-height: 1.75;
+      color: var(--ink-light); max-width: 420px;
+      margin-bottom: 2.8rem;
+    }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 0.7rem;
+      background: var(--ink); color: #fff;
+      padding: 0.9rem 2.2rem;
+      font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+      text-decoration: none; transition: background 0.25s, gap 0.25s;
+    }
+    .hero-cta:hover { background: var(--accent); gap: 1.1rem; }
+    .hero-cta svg { width: 14px; height: 14px; }
+
+    .hero-right {
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      padding: 6rem 5rem 6rem 2rem;
+      position: relative;
+    }
+    .hero-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 3rem;
+      width: 100%; max-width: 380px;
+      position: relative;
+    }
+    .hero-card::before {
+      content: '';
+      position: absolute; top: -12px; left: -12px;
+      right: 12px; bottom: 12px;
+      border: 1px solid var(--accent);
+      z-index: -1;
+    }
+    .hc-label {
+      font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 0.5rem;
+    }
+    .hc-value {
+      font-family: var(--serif); font-size: 1.35rem; font-weight: 600;
+      margin-bottom: 1.8rem;
+    }
+    .hc-divider { height: 1px; background: var(--border); margin: 1.5rem 0; }
+    .hc-stat { display: flex; justify-content: space-between; align-items: baseline; }
+    .hc-stat-num {
+      font-family: var(--serif); font-size: 2.8rem;
+      font-weight: 700; color: var(--accent); line-height: 1;
+    }
+    .hc-stat-text {
+      font-size: 0.78rem; color: var(--ink-light); text-align: right; max-width: 120px;
+    }
+
+    /* ── SECTION COMMON ── */
+    section { padding: 7rem 5rem; }
+    .section-header { margin-bottom: 4rem; }
+    .section-num {
+      font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--accent); display: flex; align-items: center; gap: 0.7rem;
+      margin-bottom: 0.8rem;
+    }
+    .section-num::before {
+      content: ''; display: block; width: 28px; height: 1px; background: var(--accent);
+    }
+    h2 {
+      font-family: var(--serif);
+      font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+      font-weight: 300; line-height: 1.1;
+    }
+    h2 strong { font-weight: 700; }
+
+    /* ── ABOUT ── */
+    #about {
+      background: var(--surface);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
+    }
+    .about-text p {
+      font-size: 1rem; line-height: 1.85; color: var(--ink-light);
+      margin-bottom: 1.2rem;
+    }
+    .about-text p strong { color: var(--ink); font-weight: 500; }
+    .about-meta { display: flex; flex-direction: column; gap: 1.2rem; }
+    .meta-item {
+      display: flex; align-items: flex-start; gap: 1rem;
+      padding: 1.2rem; border: 1px solid var(--border);
+      background: var(--bg);
+    }
+    .meta-icon {
+      width: 36px; height: 36px; background: var(--accent-light);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .meta-icon svg { width: 16px; height: 16px; stroke: var(--accent); }
+    .meta-item-label { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light); }
+    .meta-item-val { font-size: 0.92rem; color: var(--ink); margin-top: 0.2rem; }
+
+    /* ── SKILLS ── */
+    #skills { background: var(--bg); }
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;
+    }
+    .skill-group {
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 2rem;
+    }
+    .skill-group-title {
+      font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 1.4rem;
+      padding-bottom: 0.8rem; border-bottom: 1px solid var(--border);
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .skill-tag {
+      font-size: 0.8rem; padding: 0.35rem 0.85rem;
+      border: 1px solid var(--border); color: var(--ink);
+      background: var(--bg); transition: all 0.22s;
+      cursor: default;
+    }
+    .skill-tag:hover {
+      background: var(--accent); color: #fff;
+      border-color: var(--accent);
+    }
+
+    /* ── PROJECTS ── */
+    #projects { background: var(--surface); }
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+    }
+    .project-card {
+      border: 1px solid var(--border); padding: 2.2rem;
+      background: var(--bg);
+      display: flex; flex-direction: column;
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .project-card::after {
+      content: ''; position: absolute; bottom: 0; left: 0;
+      width: 100%; height: 3px; background: var(--accent);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.35s ease;
+    }
+    .project-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.07); }
+    .project-card:hover::after { transform: scaleX(1); }
+    .project-num {
+      font-family: var(--serif); font-size: 3.5rem; font-weight: 700;
+      color: var(--border); line-height: 1; margin-bottom: 1.2rem;
+      transition: color 0.3s;
+    }
+    .project-card:hover .project-num { color: var(--accent-light); }
+    .project-name {
+      font-family: var(--serif); font-size: 1.5rem; font-weight: 600;
+      margin-bottom: 0.8rem;
+    }
+    .project-desc {
+      font-size: 0.85rem; line-height: 1.7; color: var(--ink-light);
+      flex-grow: 1; margin-bottom: 1.5rem;
+    }
+    .project-tech { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .tech-badge {
+      font-size: 0.7rem; letter-spacing: 0.06em;
+      padding: 0.25rem 0.7rem;
+      background: var(--accent-light); color: var(--accent);
+    }
+
+    /* ── EDUCATION ── */
+    #education { background: var(--bg); }
+    .edu-timeline { position: relative; max-width: 680px; }
+    .edu-timeline::before {
+      content: ''; position: absolute; left: 0; top: 8px; bottom: 8px;
+      width: 1px; background: var(--border);
+    }
+    .edu-item {
+      padding-left: 3rem; margin-bottom: 3.5rem; position: relative;
+    }
+    .edu-item:last-child { margin-bottom: 0; }
+    .edu-dot {
+      position: absolute; left: -6px; top: 6px;
+      width: 13px; height: 13px;
+      background: var(--surface); border: 2px solid var(--accent);
+      border-radius: 50%;
+    }
+    .edu-year {
+      font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 0.5rem;
+    }
+    .edu-degree {
+      font-family: var(--serif); font-size: 1.6rem; font-weight: 600;
+      line-height: 1.2; margin-bottom: 0.4rem;
+    }
+    .edu-school {
+      font-size: 0.9rem; color: var(--ink-light); margin-bottom: 0.5rem;
+    }
+    .edu-cgpa {
+      display: inline-block;
+      font-size: 0.75rem; letter-spacing: 0.08em;
+      padding: 0.3rem 0.9rem;
+      background: var(--accent-light); color: var(--accent);
+    }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--surface); }
+    .contact-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem;
+    }
+    .contact-card {
+      display: flex; align-items: center; gap: 1.1rem;
+      padding: 1.5rem 1.8rem;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      text-decoration: none; color: var(--ink);
+      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+    }
+    .contact-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.07);
+      border-color: var(--accent);
+    }
+    .contact-icon {
+      width: 42px; height: 42px; flex-shrink: 0;
+      background: var(--accent-light);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .contact-icon svg { width: 18px; height: 18px; stroke: var(--accent); }
+    .contact-label {
+      font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--ink-light); margin-bottom: 0.25rem;
+    }
+    .contact-value {
+      font-size: 0.85rem; color: var(--ink); font-weight: 400;
+      word-break: break-all;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink); color: #fff;
+      padding: 4rem 5rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-name {
+      font-family: var(--serif); font-size: 1.6rem; font-weight: 300;
+    }
+    .footer-name strong { font-weight: 700; }
+    .footer-right { text-align: right; }
+    .footer-right p { font-size: 0.78rem; color: rgba(255,255,255,0.4); margin-top: 0.4rem; }
+    .footer-location {
+      font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* ── SCROLL ANIMATIONS ── */
+    .reveal {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 2rem; }
+      #hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { padding: 7rem 2rem 3rem; }
+      .hero-right { padding: 2rem 2rem 4rem; }
+      section { padding: 5rem 2rem; }
+      #about { grid-template-columns: 1fr; gap: 3rem; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+      .footer-right { text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">AP</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Available for opportunities</div>
+    <h1>Anubhav<br><span>Purohit</span></h1>
+    <p class="hero-desc">
+      A passionate software developer and machine learning enthusiast, crafting intelligent systems and full-stack applications. Aspiring to contribute at world-class organizations like Google, Amazon, and Microsoft.
+    </p>
+    <a href="#projects" class="hero-cta">
+      View My Work
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+  <div class="hero-right">
+    <div class="hero-card">
+      <div class="hc-label">Specialization</div>
+      <div class="hc-value">Software Development & Machine Learning</div>
+      <div class="hc-divider"></div>
+      <div class="hc-stat">
+        <div class="hc-stat-num">3+</div>
+        <div class="hc-stat-text">Completed Projects</div>
+      </div>
+      <div class="hc-divider"></div>
+      <div class="hc-stat">
+        <div class="hc-stat-num">7.3</div>
+        <div class="hc-stat-text">Academic CGPA (Graduation)</div>
+      </div>
+      <div class="hc-divider"></div>
+      <div class="hc-stat">
+        <div class="hc-stat-num">MCA</div>
+        <div class="hc-stat-text">Currently Pursuing</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div>
+    <div class="section-header reveal">
+      <div class="section-num">01 — About</div>
+      <h2>Who I <strong>Am</strong></h2>
+    </div>
+    <div class="about-text reveal reveal-delay-1">
+      <p>
+        Hi, I'm <strong>Anubhav Purohit</strong> — a Master's student in Computer Application from <strong>Dehradun, Uttarakhand, India</strong>. I am deeply passionate about developing software solutions and building intelligent systems through machine learning.
+      </p>
+      <p>
+        My journey in tech spans from building cross-platform mobile applications to designing real-time AI-powered systems using computer vision. I love solving complex problems and transforming ideas into functional, impactful software.
+      </p>
+      <p>
+        My goal is to secure a position at a world-class organization — such as <strong>Amazon, Microsoft, Google, or Goldman Sachs</strong> — where I can contribute meaningfully, grow alongside exceptional teams, and make a positive difference.
+      </p>
+    </div>
+  </div>
+  <div class="about-meta reveal reveal-delay-2">
+    <div class="meta-item">
+      <div class="meta-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+      </div>
+      <div>
+        <div class="meta-item-label">Location</div>
+        <div class="meta-item-val">Dehradun, Uttarakhand, India</div>
+      </div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10.5V6a2 2 0 00-2-2H4a2 2 0 00-2 2v12a2 2 0 002 2h8.5"/><path d="M2 10h20M8 2v4M16 2v4"/></svg>
+      </div>
+      <div>
+        <div class="meta-item-label">Degree</div>
+        <div class="meta-item-val">MCA — Graphic Era University (2025–27)</div>
+      </div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+      </div>
+      <div>
+        <div class="meta-item-label">Focus Areas</div>
+        <div class="meta-item-val">Software Development · Machine Learning · AI</div>
+      </div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01z"/></svg>
+      </div>
+      <div>
+        <div class="meta-item-label">Goal</div>
+        <div class="meta-item-val">Big Tech / Top-tier Organization</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header reveal">
+    <div class="section-num">02 — Skills</div>
+    <h2>My <strong>Tech Stack</strong></h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-group reveal reveal-delay-1">
+      <div class="skill-group-title">Programming Languages</div>
+      <div class="skill-tags">
+        <span class="skill-tag">C</span>
+        <span class="skill-tag">C++</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">HTML / CSS</span>
+        <span class="skill-tag">JavaScript</span>
+      </div>
+    </div>
+    <div class="skill-group reveal reveal-delay-2">
+      <div class="skill-group-title">Libraries, Frameworks & Tools</div>
+      <div class="skill-tags">
+        <span class="skill-tag">TensorFlow</span>
+        <span class="skill-tag">Node.js</span>
+        <span class="skill-tag">React Native</span>
+        <span class="skill-tag">VS Code</span>
+        <span class="skill-tag">Android Studio</span>
+        <span class="skill-tag">Git</span>
+        <span class="skill-tag">GitHub</span>
+        <span class="skill-tag">REST APIs</span>
+      </div>
+    </div>
+    <div class="skill-group reveal reveal-delay-1">
+      <div class="skill-group-title">Databases</div>
+      <div class="skill-tags">
+        <span class="skill-tag">MySQL</span>
+        <span class="skill-tag">MongoDB</span>
+      </div>
+    </div>
+    <div class="skill-group reveal reveal-delay-2">
+      <div class="skill-group-title">Core Subjects</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Software Engineering</span>
+        <span class="skill-tag">Computer Networking</span>
+        <span class="skill-tag">Operating Systems</span>
+        <span class="skill-tag">DBMS</span>
+        <span class="skill-tag">OOPs</span>
+        <span class="skill-tag">DSA</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header reveal">
+    <div class="section-num">03 — Projects</div>
+    <h2>Selected <strong>Work</strong></h2>
+  </div>
+  <div class="projects-grid">
+
+    <div class="project-card reveal reveal-delay-1">
+      <div class="project-num">01</div>
+      <div class="project-name">Expense Tracker</div>
+      <div class="project-desc">
+        A cross-platform mobile application that empowers users to take full control of their personal finances. Built with React Native & Expo, integrated with Firebase for backend operations and secure user authentication.
+      </div>
+      <div class="project-tech">
+        <span class="tech-badge">React Native</span>
+        <span class="tech-badge">Expo</span>
+        <span class="tech-badge">Firebase</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal reveal-delay-2">
+      <div class="project-num">02</div>
+      <div class="project-name">Hand Gesture Recognition</div>
+      <div class="project-desc">
+        An innovative AI application that allows users to interact with computers using hand gestures — eliminating physical input devices. Uses computer vision and ML to detect, track, and classify gestures in real time through a webcam.
+      </div>
+      <div class="project-tech">
+        <span class="tech-badge">Python</span>
+        <span class="tech-badge">Computer Vision</span>
+        <span class="tech-badge">Machine Learning</span>
+        <span class="tech-badge">OpenCV</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal reveal-delay-3">
+      <div class="project-num">03</div>
+      <div class="project-name">SkillBridge</div>
+      <div class="project-desc">
+        A Student Skill Gap Analyzer that bridges the gap between students' current skill levels and industry expectations. Leverages core DSA concepts — arrays, linked lists, hashing, heaps, and graphs — to store, manage, and compare student performance data with company requirements.
+      </div>
+      <div class="project-tech">
+        <span class="tech-badge">JavaScript</span>
+        <span class="tech-badge">Python</span>
+        <span class="tech-badge">HTML / CSS</span>
+        <span class="tech-badge">DSA</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-header reveal">
+    <div class="section-num">04 — Education</div>
+    <h2>Academic <strong>Journey</strong></h2>
+  </div>
+  <div class="edu-timeline">
+
+    <div class="edu-item reveal reveal-delay-1">
+      <div class="edu-dot"></div>
+      <div class="edu-year">2025 — 2027 · Ongoing</div>
+      <div class="edu-degree">Master of Computer Application</div>
+      <div class="edu-school">Graphic Era University, Dehradun</div>
+      <span class="edu-cgpa">Currently Pursuing</span>
+    </div>
+
+    <div class="edu-item reveal reveal-delay-2">
+      <div class="edu-dot"></div>
+      <div class="edu-year">2022 — 2025 · Completed</div>
+      <div class="edu-degree">Bachelor of Computer Application</div>
+      <div class="edu-school">Graphic Era Hill University, Dehradun</div>
+      <span class="edu-cgpa">CGPA — 7.3</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header reveal">
+    <div class="section-num">05 — Contact</div>
+    <h2>Get In <strong>Touch</strong></h2>
+  </div>
+  <div class="contact-grid">
+
+    <a href="mailto:anubhavpurohit2005@gmail.com" class="contact-card reveal reveal-delay-1">
+      <div class="contact-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/>
+        </svg>
+      </div>
+      <div>
+        <div class="contact-label">Email</div>
+        <div class="contact-value">anubhavpurohit2005@gmail.com</div>
+      </div>
+    </a>
+
+    <a href="tel:+918077640172" class="contact-card reveal reveal-delay-2">
+      <div class="contact-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.07 1.18 2 2 0 012.04 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+        </svg>
+      </div>
+      <div>
+        <div class="contact-label">Mobile</div>
+        <div class="contact-value">+91-80776-40172</div>
+      </div>
+    </a>
+
+    <div class="contact-card reveal reveal-delay-3" style="cursor:default;">
+      <div class="contact-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/>
+        </svg>
+      </div>
+      <div>
+        <div class="contact-label">Location</div>
+        <div class="contact-value">Dehradun, Uttarakhand, India</div>
+      </div>
+    </div>
+
+    <a href="https://www.linkedin.com/in/anubhav-purohit-9718ba213/" target="_blank" class="contact-card reveal reveal-delay-3">
+      <div class="contact-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="4"/>
+          <path d="M7 10v7M7 7v.01M12 17v-4a2 2 0 014 0v4M12 10v7"/>
+        </svg>
+      </div>
+      <div>
+        <div class="contact-label">LinkedIn</div>
+        
+      </div>
+    </a>
+
+    <a href="https://github.com/AnubhavPurohit07" target="_blank" class="contact-card reveal reveal-delay-1">
+      <div class="contact-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/>
+        </svg>
+      </div>
+      <div>
+        <div class="contact-label">GitHub</div>
+        
+      </div>
+    </a>
+
+    <a href="https://leetcode.com/u/Anubhav_Purohit/" target="_blank" class="contact-card reveal reveal-delay-2">
+      <div class="contact-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      <div>
+        <div class="contact-label">LeetCode</div>
+        
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Anubhav <strong>Purohit</strong></div>
+  <div class="footer-right">
+    <div class="footer-location">📍 Dehradun, Uttarakhand, India</div>
+    <p>Master's Student · Software Developer · ML Enthusiast</p>
+    <p style="margin-top:0.8rem; display:flex; gap:1.2rem; justify-content:flex-end;">
+      <a href="https://github.com/AnubhavPurohit07" target="_blank" style="color:rgba(255,255,255,0.5);font-size:0.75rem;text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;">GitHub</a>
+      <a href="https://www.linkedin.com/in/anubhav-purohit-9718ba213/" target="_blank" style="color:rgba(255,255,255,0.5);font-size:0.75rem;text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;">LinkedIn</a>
+      <a href="https://leetcode.com/u/Anubhav_Purohit/" target="_blank" style="color:rgba(255,255,255,0.5);font-size:0.75rem;text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;">LeetCode</a>
+      <a href="mailto:anubhavpurohit2005@gmail.com" style="color:rgba(255,255,255,0.5);font-size:0.75rem;text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;">Email</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => io.observe(el));
+
+  // Animate hero on load
+  document.querySelectorAll('.hero-left > *, .hero-right > *').forEach((el, i) => {
+    el.style.opacity = 0;
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = `opacity 0.7s ease ${i * 0.15}s, transform 0.7s ease ${i * 0.15}s`;
+    setTimeout(() => {
+      el.style.opacity = 1;
+      el.style.transform = 'translateY(0)';
+    }, 100);
+  });
+</script>
+</body>
+</html>
